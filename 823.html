@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>823</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manejo de Errores en JavaScript</h1>
+    <label for="errorType">Selecciona un tipo de error:</label>
+    <select id="errorType">
+        <option value="1">Error (Error)</option>
+        <option value="2">TypeError</option>
+        <option value="3">ReferenceError</option>
+        <option value="4">SyntaxError</option>
+        <option value="5">RangeError</option>
+        <option value="6">EvalError</option>
+        <option value="7">URIError</option>
+    </select>
+    <button onclick="generarError()">Generar Error</button>
+    <script>
+        function generarError() {
+            let tipo = document.getElementById("errorType").value;
+
+            try {
+                switch (tipo) {
+                    case "1":
+                        throw new Error("Este es un error general.");
+                    case "2":
+                        throw new TypeError("Este es un TypeError.");
+                    case "3":
+                        throw new ReferenceError("Este es un ReferenceError.");
+                    case "4":
+                        throw new SyntaxError("Este es un SyntaxError.");
+                    case "5":
+                        throw new RangeError("Este es un RangeError.");
+                    case "6":
+                        throw new EvalError("Este es un EvalError.");
+                    case "7":
+                        throw new URIError("Este es un URIError.");
+                    default:
+                        console.log("Selección no válida.");
+                }
+            } catch (e) {
+                alert(`Se ha capturado un error:\n${e.name}: ${e.message}`);
+                console.error(e);
+            }
+        }
+    </script>
+</body>
+</html>

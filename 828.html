@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujar logotipo opel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        canvas {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="opelLogo" width="600px" height="600px"></canvas>
+
+    <script>
+        function draw() {
+        const canvas = document.getElementById("opelLogo");
+        if (canvas.getContext) {
+            const ctx = canvas.getContext("2d");
+
+            ctx.beginPath();
+            ctx.arc(300, 300, 250, 0, Math.PI * 2, true);
+            ctx.arc(300, 300, 200, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.moveTo(500, 350);
+            ctx.lineTo(200, 350);
+            ctx.lineTo(275, 300);
+            ctx.lineTo(75, 275);
+            ctx.lineTo(375, 275);
+            ctx.lineTo(300, 325);
+            ctx.lineTo(500, 350);
+            ctx.fill();
+            ctx.stroke();
+        }
+      }
+      window.addEventListener("load", draw);
+    </script>
+</body>
+</html>

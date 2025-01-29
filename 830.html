@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>830</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <script>   
+        if (!"Notification" in window) {
+            alert("Esta tarea no funcionara en este navegador. No tiene permiso sobre notificaciones.");
+        } else if (Notification.permission === "granted") {
+            setInterval(5000, () => {
+                let notification = new Notification("<a href='www.google.com'>Ve a google</a>");
+            });  
+        } else if (Notification.permission === "denied") {
+            Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                    const notification = new Notification("Has aceptado las notificaciones.");
+                }
+            });
+        } else {
+            Notification.requestPermission().then((permission) => {
+                const notification = new Notification("Has aceptado las notificaciones.");
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8.22</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Ejemplo de Errores en una Aplicación Web</h1>
+        <sub>Mirar consola</sub>
+    </div>
+    <button onclick="generarError()">Generar Error</button>
+    <button onclick="generarExcepcion()">Generar Excepción</button>
+    <button onclick="mostrarAviso()">Mostrar Aviso</button>
+
+    <script>
+        function generarError() {
+            console.log("Provocando un error...");
+            noDefinida(); 
+        }
+
+        function generarExcepcion() {
+            try {
+                console.log("Manejando una excepción...");
+                throw new Error("Este es un error controlado con try-catch.");
+            } catch (exception) {
+                alert("Se ha capturado una excepción: " + exception.message);
+            }
+        }
+
+        function mostrarAviso() {
+            console.warn("Este es un aviso de precaución.");
+            alert("Aviso: Algo podría no estar funcionando como se espera.");
+        }
+    </script>
+</body>
+</html>
