@@ -10,26 +10,57 @@
             text-align: center;
             margin: 50px;
         }
+        button {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <script>   
-        if (!"Notification" in window) {
-            alert("Esta tarea no funcionara en este navegador. No tiene permiso sobre notificaciones.");
-        } else if (Notification.permission === "granted") {
-            setInterval(5000, () => {
-                let notification = new Notification("<a href='www.google.com'>Ve a google</a>");
-            });  
-        } else if (Notification.permission === "denied") {
-            Notification.requestPermission().then((permission) => {
-                if (permission === "granted") {
-                    const notification = new Notification("Has aceptado las notificaciones.");
+    <h1>Notificaciones Automáticas</h1>
+    <button onclick="solicitarPermiso()">Activar Notificaciones</button>
+
+    <script>
+        let intervalo;
+        let urlDestino = "https://google.com"; // Cambia por la URL deseada
+        let notificar = true; // Controla si se deben seguir mostrando notificaciones
+
+        function solicitarPermiso() {
+            if (!("Notification" in window)) {
+                alert("Tu navegador no soporta notificaciones.");
+                return;
+            }
+
+            Notification.requestPermission().then(permiso => {
+                if (permiso === "granted") {
+                    iniciarNotificaciones();
+                } else {
+                    alert("Debes permitir las notificaciones para que funcionen.");
                 }
             });
-        } else {
-            Notification.requestPermission().then((permission) => {
-                const notification = new Notification("Has aceptado las notificaciones.");
-            });
+        }
+
+        function iniciarNotificaciones() {
+            intervalo = setInterval(() => {
+                if (!notificar) return;
+
+                let notificacion = new Notification("¡Atención!", {
+                    body: "Haz clic aquí para visitar el enlace."
+                });
+
+                // Cierra la notificación después de 5 segundos si no se interactúa
+                setTimeout(() => {
+                    notificacion.close();
+                }, 5000);
+
+                // Al hacer clic en la notificación, se abre la URL y se detienen futuras notificaciones
+                notificacion.onclick = () => {
+                    window.open(urlDestino, "_blank");
+                    notificar = false;
+                    clearInterval(intervalo);
+                };
+            }, 30000); // Cada 30 segundos
         }
     </script>
 </body>
